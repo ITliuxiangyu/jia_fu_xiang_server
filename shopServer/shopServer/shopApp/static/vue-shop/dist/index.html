@@ -1,0 +1,65 @@
+<!DOCTYPE html><html><head><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,user-scalable=0"><title>嘉福祥商城</title><script src=static/jquery2.0.js></script><link href=./static/css/app.44649c0995bafebeda2cb12c7d07b88a.css rel=stylesheet></head><script src=./static/jweixin-1.4.0.js></script><script>//判断是否是微信浏览器的函数
+    function isWeiXin(){
+      var ua = window.navigator.userAgent.toLowerCase();
+      //通过正则表达式匹配ua中是否含有MicroMessenger字符串
+      if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+      return true;
+      }else{
+      return false;
+      }
+    }
+
+    function getQueryString (name) {
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+      var r = window.location.search.substr(1).match(reg)
+      if (r != null) return unescape(r[2])
+      return null
+    }
+
+    if(isWeiXin()){
+      var huoqu_wxid = this.getQueryString('wxid')
+      if (huoqu_wxid) {
+        localStorage.setItem('fenxiangren' , huoqu_wxid)
+        window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe0df1aa623047849&redirect_uri=http%3a%2f%2fwww.dangsh.top%2fstatic%2fvue-shop%2fdist%2findex.html&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect'
+      } else {
+        var code = this.getQueryString('code')
+        $.ajax({
+          type: "POST",
+          url: "http://www.dangsh.top/getOpenidByCode_new_fn/",
+          data: "code=" + code,
+          success: function (result) {
+            if (result.status === 'ok') {
+              localStorage.setItem('personalInfo', JSON.stringify(result.data))
+              if (localStorage.getItem('fenxiangren')) {
+                var current_wxid = result.data.wxid
+                if (current_wxid == localStorage.getItem('fenxiangren')) {
+                } else {
+                  $.ajax({
+                    type: 'POST' , 
+                    url: 'http://www.dangsh.top/addUserShangjiNewFn/' , 
+                    data: 'wxid=' + current_wxid + '&upperson=' + localStorage.getItem('fenxiangren') , 
+                    success: function (chenggong) {
+                      localStorage.removeItem('fenxiangren')
+                    },
+                    error: function (err) {
+                      localStorage.removeItem('fenxiangren')
+                    }
+                  })
+                }
+              } else {
+                localStorage.removeItem('fenxiangren')
+              }
+            } else {
+              alert('获取用户信息失败,请关闭页面重新进入')
+              alert(JSON.stringify(result))
+            }
+          },
+          error: function (error) {
+            alert('错误: 获取用户信息失败,请关闭页面重新进入')
+            alert(JSON.stringify(error))
+          }
+        });
+      }
+    }else{
+  　　alert('在微信浏览器中打开该链接')
+    }</script><body><div id=app-box></div><script type=text/javascript src=./static/js/manifest.04cdd0a079c5594b935c.js></script><script type=text/javascript src=./static/js/vendor.273aee9160ace0fee019.js></script><script type=text/javascript src=./static/js/app.fc4ae80fd9a7ad033c8a.js></script></body></html>

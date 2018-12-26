@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<title>Document</title>
+	</head>
+
+	<body>
+
+	</body>
+
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+	<script type="text/javascript">
+
+	alert(location.href.split('#')[0])
+        
+		alert("fffff")
+		// http://www.dangsh.top:8888/wxPhpDemo/index.php
+		// http://1.fgfgff.applinzi.com/index.php
+		
+		// $.ajax({
+		// 	type: "GET",
+		// 	url: "http://www.dangsh.top:8888/wxPhpDemo/index.php",
+		// 	success: function(msg) {
+		// 		console.log("成功......")
+		// 		console.log(msg);
+		// 		// jssdkSuccess(JSON.parse(msg))
+		// 	},
+		// 	error: function(err) {
+		// 		console.log("失败.....")
+		// 		console.log(err)
+		// 	}
+		// })
+
+		// function jssdkSuccess(mainJssdkPackage) {
+		// 	console.log(mainJssdkPackage)
+		// 	wx.config({
+		// 		debug: true,
+		// 		appId: mainJssdkPackage.appId,
+		// 		timestamp: mainJssdkPackage.timestamp,
+		// 		nonceStr: mainJssdkPackage.nonceStr,
+		// 		signature: mainJssdkPackage.signature,
+		// 		jsApiList: [
+		// 			"onMenuShareTimeline"
+		// 		]
+		// 	});
+		// 	wx.ready(function() {
+		// 		wx.onMenuShareTimeline({
+		// 			title: '第一次', // 分享标题
+		// 			link: 'http://www.dangsh.top', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+		// 			imgUrl: 'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3334571275,3062593017&fm=58', // 分享图标
+		// 			success: function () {
+		// 				// 用户确认分享后执行的回调函数
+		// 				alert("用户确认分享")
+		// 			},
+		// 			cancel: function () {
+		// 				// 用户取消分享后执行的回调函数
+		// 				alert("用户取消分享")
+		// 			}
+		// 		});
+		// 	});
+		// }
+	</script>
+
+</html>
