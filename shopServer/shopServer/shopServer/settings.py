@@ -30,6 +30,8 @@ ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
+# 我是新家的测试
+
 INSTALLED_APPS = [
     'shopApp' , 
     'django.contrib.admin',
